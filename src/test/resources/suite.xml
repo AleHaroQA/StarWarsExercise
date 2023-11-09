@@ -1,0 +1,11 @@
+<suite name="Web Automation Suite">
+    <parameter name="url" value="https://www.wikipedia.org/wiki/Wikipedia:Portada" />
+    <parameter name="browser" value="chrome" />
+    <!--<parameter name="textToSearch"
+               value="Luke Skywalker" />-->
+    <test name="Search Test">
+        <classes>
+            <class name="tests.SwapiTests" />
+        </classes>
+    </test>
+</suite>
