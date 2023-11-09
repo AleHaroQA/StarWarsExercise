@@ -13,6 +13,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.EditPage;
+import pages.HistoryPage;
 import pages.HomePage;
 import pages.ResultPage;
 import utils.baseTest.BaseTest;
@@ -25,8 +26,6 @@ import static org.testng.Assert.assertTrue;
 
 public class SwapiTests extends BaseTest {
 
-
-    /*@Given("Soy un usuario en la página web de Wikipedia solicitando el personaje de Star Wars número 1")*/
     @Test
     @Ignore
     public void searchTest(){
@@ -42,6 +41,7 @@ public class SwapiTests extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void searchFilmTest(){
 
         Response response;
@@ -55,18 +55,30 @@ public class SwapiTests extends BaseTest {
 
         ResultPage results = home.searchText(nameFilm);
 
-        /*assertTrue(results.isTitleCorrect(nameFilm), "The title does not match.");*/
-
         EditPage editResult = results.clickOnEdit();
 
         assertTrue(editResult.isTitleEditCorrect(nameFilm), "The title does not match.");
-
     }
 
+    @Test
+    public void FilmHistorialTest(){
 
+        Response response;
 
+        /*Random random = new Random();
+        int numFilm = random.nextInt(1,6);*/
 
+        response = given().get("https://swapi.dev/api/films/6" );
+        String nameFilm =  response.then().extract().path("title");
+        System.out.println(nameFilm);
+        HomePage home = loadFirstPage();
 
+        ResultPage results = home.searchText(nameFilm);
+
+        HistoryPage historyResults = results.clickOnHistorial();
+
+        assertTrue(historyResults.isTitleHistoryCorrect(nameFilm), "The title does not match.");
+    }
 }
 
 

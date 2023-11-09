@@ -27,4 +27,13 @@ public class ResultPage extends BasePage {
         return new EditPage(super.getDriver());
     }
 
+    @FindBy(css = "li#ca-history a")
+    /*@FindBy(css = "#ca-history > a > span")*/
+    private WebElement historial;
+    public HistoryPage clickOnHistorial(){
+        waitElementVisibility(historial);
+        historial.click();
+        return new HistoryPage(super.getDriver());
+    }
+
 }
